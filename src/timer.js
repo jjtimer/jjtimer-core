@@ -8,9 +8,27 @@ var Timer = (function(Util) {
   var startTime = undefined, endTime = undefined, solveTime = undefined;
   var intervalID = undefined;
 
-  function isWaiting() { return state == Waiting; }
-  function isReady() { return state == Ready; }
-  function isRunning() { return state == Running; }
+  function isWaiting() { return state === Waiting; }
+  function isReady() { return state === Ready; }
+  function isRunning() { return state === Running; }
+
+  function onWaiting() {
+    endTime = Util.getMilli();
+    clearInterval(intervalID);
+  }
+
+  function onRunning() {
+    startTime = Util.getMilli();
+    intervalID = setInterval(runningEmitter, 100);
+  }
+
+  function setState(new_state) {
+    state = new_state;
+    switch(state) {
+    case Waiting: onWaiting(); break;
+    case Running: onRunning(); break;
+    }
+  }
 
   function runningEmitter() {
     Event.emit("timer/running");
@@ -18,15 +36,11 @@ var Timer = (function(Util) {
 
   function trigger() {
     if (isWaiting()) {
-      state = Ready;
+      setState(Ready);
     } else if (isReady()) {
-      state = Running;
-      startTime = Util.getMilli();
-      intervalID = setInterval(runningEmitter, 100);
+      setState(Running);
     } else if (isRunning()) {
-      state = Waiting;
-      endTime = Util.getMilli();
-      clearInterval(intervalID);
+      setState(Waiting);
     }
   }
 

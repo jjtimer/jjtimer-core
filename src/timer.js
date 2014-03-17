@@ -14,12 +14,12 @@ var Timer = (function(Util) {
 
   function onWaiting() {
     endTime = Util.getMilli();
-    clearInterval(intervalID);
+    Util.clearInterval(intervalID);
   }
 
   function onRunning() {
     startTime = Util.getMilli();
-    intervalID = setInterval(runningEmitter, 100);
+    intervalID = Util.setInterval(runningEmitter, 100);
   }
 
   function setState(new_state) {

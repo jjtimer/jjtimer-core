@@ -45,7 +45,7 @@ var Timer = (function(Util) {
   }
 
   function getCurrent() {
-    return Util.getMill() - startTime;
+    return Util.getMilli() - startTime;
   }
 
   return {

@@ -2,7 +2,7 @@ var Timer = (function(Util) {
   'use strict';
 
   // Internal constants for the various timer states.
-  var Waiting = 0, Inspecting = 1, Ready = 2, Running = 3, Delay = 4;
+  var Waiting = 0, Inspecting = 1, Ready = 2, Running = 3, Stopped = 4;
 
   var state = Waiting;
   var startTime = undefined, endTime = undefined, solveTime = undefined;
@@ -12,21 +12,22 @@ var Timer = (function(Util) {
   function isReady() { return state === Ready; }
   function isRunning() { return state === Running; }
 
-  function onWaiting() {
-    endTime = Util.getMilli();
-    Util.clearInterval(intervalID);
-  }
-
   function onRunning() {
     startTime = Util.getMilli();
     intervalID = Util.setInterval(runningEmitter, 100);
   }
 
+  function onStopped() {
+    endTime = Util.getMilli();
+    Util.clearInterval(intervalID);
+    setState(Waiting);
+  }
+
   function setState(new_state) {
     state = new_state;
     switch(state) {
-    case Waiting: onWaiting(); break;
     case Running: onRunning(); break;
+    case Stopped: onStopped(); break;
     }
   }
 
@@ -34,13 +35,17 @@ var Timer = (function(Util) {
     Event.emit("timer/running");
   }
 
-  function trigger() {
+  function triggerDown() {
     if (isWaiting()) {
       setState(Ready);
-    } else if (isReady()) {
-      setState(Running);
     } else if (isRunning()) {
-      setState(Waiting);
+      setState(Stopped);
+    }
+  }
+
+  function triggerUp() {
+    if (isReady()) {
+      setState(Running);
     }
   }
 
@@ -49,7 +54,8 @@ var Timer = (function(Util) {
   }
 
   return {
-    trigger: trigger,
+    triggerDown: triggerDown,
+    triggerUp: triggerUp,
     getCurrent: getCurrent
   };
 });

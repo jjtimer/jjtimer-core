@@ -12,6 +12,10 @@ var Timer = (function(Util) {
   function isReady() { return state === Ready; }
   function isRunning() { return state === Running; }
 
+  function onWaiting() {
+    endTime = undefined;
+  }
+
   function onRunning() {
     startTime = Util.getMilli();
     intervalID = Util.setInterval(runningEmitter, 100);
@@ -26,6 +30,7 @@ var Timer = (function(Util) {
   function setState(new_state) {
     state = new_state;
     switch(state) {
+    case Waiting: onWaiting(); break;
     case Running: onRunning(); break;
     case Stopped: onStopped(); break;
     }
@@ -50,7 +55,7 @@ var Timer = (function(Util) {
   }
 
   function getCurrent() {
-    return Util.getMilli() - startTime;
+    return (endTime || Util.getMilli()) - startTime;
   }
 
   return {

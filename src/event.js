@@ -25,3 +25,6 @@ var Event = (function() {
     emit: emit
   };
 });
+
+if (!(typeof module === 'undefined'))
+  module.exports = Event();

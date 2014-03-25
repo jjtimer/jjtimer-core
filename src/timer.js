@@ -1,4 +1,4 @@
-var Timer = (function(Util) {
+var Timer = (function(Event, Util) {
   'use strict';
 
   // Internal constants for the various timer states.
@@ -64,3 +64,6 @@ var Timer = (function(Util) {
     getCurrent: getCurrent
   };
 });
+
+if (!(typeof module === 'undefined'))
+  module.exports = Timer;

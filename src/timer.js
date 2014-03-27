@@ -65,5 +65,5 @@ var Timer = (function(Event, Util) {
   };
 });
 
-if (!(typeof module === 'undefined'))
+if (typeof module !== 'undefined')
   module.exports = Timer;

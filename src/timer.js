@@ -5,8 +5,8 @@ var Timer = (function(Event, Util) {
   var Waiting = 0, Inspecting = 1, Ready = 2, Running = 3, Stopped = 4;
 
   var state = Waiting;
-  var startTime = undefined, endTime = undefined, solveTime = undefined;
-  var intervalID = undefined;
+  var startTime, endTime, solveTime;
+  var intervalID;
 
   function isWaiting() { return state === Waiting; }
   function isReady() { return state === Ready; }

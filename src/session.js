@@ -1,11 +1,23 @@
 var Session = (function() {
   'use strict';
 
-  function reset() {}
+  var solves = [];
 
-  function add(solve) {}
+  function reset() {
+    solves = [];
+  }
 
-  function remove(index) {}
+  function add(solve) {
+    solves.push(solve);
+  }
+
+  function length() {
+    return solves.length;
+  }
+
+  function remove(index) {
+    solves.splice(index, 1);
+  }
 
   function toggle_dnf(index) {}
 
@@ -17,6 +29,7 @@ var Session = (function() {
     reset: reset,
     add: add,
     remove: remove,
+    length: length,
     toggle_dnf: toggle_dnf,
     toggle_plus2: toggle_plus2,
     average: average
@@ -24,4 +37,4 @@ var Session = (function() {
 });
 
 if (typeof module !== 'undefined')
-  module.exports = Session();
+  module.exports = Session;

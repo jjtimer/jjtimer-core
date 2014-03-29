@@ -24,6 +24,7 @@ var Timer = (function(Event, Util) {
   function onStopped() {
     endTime = Util.getMilli();
     Util.clearInterval(intervalID);
+    Event.emit('timer/stopped');
     setState(Waiting);
   }
 

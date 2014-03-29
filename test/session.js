@@ -15,4 +15,14 @@ describe('Session', function() {
     S.reset();
     assert.equal(0, S.length());
   })
+
+  it('should calculate averages', function() {
+    var S = Session();
+    assert.equal(-1 /* DNF */, S.average());
+    S.add({ time: 0 });
+    assert.equal(-1 /* DNF */, S.average());
+    S.add({ time: 0 });
+    S.add({ time: 0 });
+    assert.equal(0, S.average());
+  })
 })

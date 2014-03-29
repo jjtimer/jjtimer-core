@@ -37,7 +37,7 @@ var Timer = (function(Event, Util) {
   }
 
   function runningEmitter() {
-    Event.emit("timer/running");
+    Event.emit('timer/running');
   }
 
   function triggerDown() {

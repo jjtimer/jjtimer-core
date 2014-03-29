@@ -7,12 +7,12 @@ describe('Event', function() {
     var count = 0;
     var counter = function() { count += 1; };
 
-    Event.on("count", counter);
-    Event.emit("count");
+    Event.on('count', counter);
+    Event.emit('count');
     assert.equal(1, count);
 
-    Event.on("count", counter);
-    Event.emit("count");
+    Event.on('count', counter);
+    Event.emit('count');
     assert.equal(3, count);
   });
 });

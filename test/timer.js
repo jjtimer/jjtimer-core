@@ -17,7 +17,7 @@ var Timer = require('../src/timer.js')(Event, MockUtil);
 
 describe('Timer', function() {
   it('should start after a triggerDown, triggerUp', function() {
-    Event.on("timer/running", function() { MockUtil.incrementMilli(); });
+    Event.on('timer/running', function() { MockUtil.incrementMilli(); });
 
     Timer.triggerDown();
     Timer.triggerUp();

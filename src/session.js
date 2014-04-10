@@ -19,6 +19,10 @@ var Session = (function() {
     solves.splice(index, 1);
   }
 
+  function at(index) {
+    return solves[index];
+  }
+
   function toggle_dnf(index) {}
 
   function toggle_plus2(index) {}
@@ -56,6 +60,7 @@ var Session = (function() {
     reset: reset,
     add: add,
     remove: remove,
+    at: at,
     length: length,
     toggle_dnf: toggle_dnf,
     toggle_plus2: toggle_plus2,

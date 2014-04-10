@@ -11,7 +11,9 @@ describe('Session', function() {
     S.add({ time: 0 });
     assert.equal(2, S.length());
     S.remove(1);
-    assert(1, S.length());
+    assert.equal(1, S.length());
+    var t = S.at(0);
+    assert.equal(0, t.time);
     S.reset();
     assert.equal(0, S.length());
   })

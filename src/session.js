@@ -62,6 +62,18 @@ var Session = (function() {
     return average(solves.length - length, length);
   }
 
+  function best_average(length) {
+    var bestIndex = -1, bestAvg = -1;
+    for(var index = 0; solves.length >= index + length; index += 1) {
+      var avg = average(index, length);
+      if (avg < bestAvg || bestAvg == -1) {
+        bestAvg = avg;
+        bestIndex = index;
+      }
+    }
+    return bestAvg;
+  }
+
   return {
     reset: reset,
     add: add,
@@ -71,7 +83,8 @@ var Session = (function() {
     toggle_dnf: toggle_dnf,
     toggle_plus2: toggle_plus2,
     average: average,
-    current_average: current_average
+    current_average: current_average,
+    best_average: best_average
   };
 });
 

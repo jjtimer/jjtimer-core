@@ -8,6 +8,12 @@ var Timer = (function(Event, Util) {
   var startTime, endTime, solveTime;
   var intervalID;
 
+  function reset() {
+    setState(Waiting);
+    if (intervalID)
+      Util.clearInterval(intervalID);
+  }
+
   function isWaiting() { return state === Waiting; }
   function isReady() { return state === Ready; }
   function isRunning() { return state === Running; }
@@ -60,6 +66,7 @@ var Timer = (function(Event, Util) {
   }
 
   return {
+    reset: reset,
     triggerDown: triggerDown,
     triggerUp: triggerUp,
     getCurrent: getCurrent

@@ -24,7 +24,7 @@ var Timer = (function(Event, Util) {
 
   function onRunning() {
     startTime = Util.getMilli();
-    intervalID = Util.setInterval(runningEmitter, 100);
+    intervalID = Util.setInterval(runningEmitter, 10);
   }
 
   function onStopped() {

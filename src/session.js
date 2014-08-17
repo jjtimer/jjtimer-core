@@ -16,6 +16,7 @@ var Session = (function() {
   }
 
   function remove(index) {
+    index = index || solves.length - 1;
     solves.splice(index, 1);
   }
 
@@ -40,6 +41,7 @@ var Session = (function() {
     length = length || solves.length;
 
     if (length < 3) return -1;
+    if (solves.length < length) return -1;
 
     var end = start + length;
     var trim = get_trim(length);
@@ -56,6 +58,10 @@ var Session = (function() {
     return sum / (length - (2 * trim));
   }
 
+  function current_average(length) {
+    return average(solves.length - length, length);
+  }
+
   return {
     reset: reset,
     add: add,
@@ -64,7 +70,8 @@ var Session = (function() {
     length: length,
     toggle_dnf: toggle_dnf,
     toggle_plus2: toggle_plus2,
-    average: average
+    average: average,
+    current_average: current_average
   };
 });
 

@@ -5,7 +5,8 @@ var Timer = (function(Event, Util) {
   var Waiting = 0, Inspecting = 1, Ready = 2, Running = 3, Stopped = 4;
 
   var state = Waiting;
-  var startTime, endTime, solveTime;
+  var startTime, endTime;
+  var numSplits = 0, curSplit = 0, splitTimes = [];
   var intervalID;
 
   function reset() {
@@ -14,29 +15,47 @@ var Timer = (function(Event, Util) {
       Util.clearInterval(intervalID);
   }
 
+  function setSplits(num) {
+    numSplits = num;
+  }
+
+  function getSplits() {
+    return splitTimes;
+  }
+
   function isWaiting() { return state === Waiting; }
   function isReady() { return state === Ready; }
   function isRunning() { return state === Running; }
 
   function onWaiting() {
+    state = Waiting;
+    curSplit = 0;
     endTime = undefined;
   }
 
   function onRunning() {
     startTime = Util.getMilli();
+    state = Running;
     intervalID = Util.setInterval(runningEmitter, 10);
+    splitTimes = [];
   }
 
   function onStopped() {
+    if (curSplit < numSplits) {
+      splitTimes.push(Util.getMilli());
+      curSplit += 1;
+      return;
+    }
     endTime = Util.getMilli();
     Util.clearInterval(intervalID);
+    state = Stopped;
     Event.emit('timer/stopped');
     setState(Waiting);
   }
 
   function setState(new_state) {
-    state = new_state;
-    switch(state) {
+    switch(new_state) {
+    case Ready: state = Ready; break;
     case Waiting: onWaiting(); break;
     case Running: onRunning(); break;
     case Stopped: onStopped(); break;
@@ -70,7 +89,9 @@ var Timer = (function(Event, Util) {
     triggerDown: triggerDown,
     triggerUp: triggerUp,
     getCurrent: getCurrent,
-    isRunning: isRunning
+    isRunning: isRunning,
+    setSplits: setSplits,
+    getSplits: getSplits
   };
 });
 

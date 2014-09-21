@@ -69,7 +69,8 @@ var Timer = (function(Event, Util) {
     reset: reset,
     triggerDown: triggerDown,
     triggerUp: triggerUp,
-    getCurrent: getCurrent
+    getCurrent: getCurrent,
+    isRunning: isRunning
   };
 });
 

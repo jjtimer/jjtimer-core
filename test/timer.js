@@ -31,6 +31,7 @@ describe('Timer', function() {
     MockUtil.fireInterval();
     MockUtil.fireInterval();
     assert.equal(5, Timer.getCurrent());
+    assert.equal(true, Timer.isRunning());
     assert.equal(false, stoppedEvent);
     Timer.triggerDown();
     Timer.triggerUp();

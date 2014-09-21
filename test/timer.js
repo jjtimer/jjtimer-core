@@ -19,11 +19,14 @@ describe('Timer', function() {
     var MockUtil = MockUtilObj();
     var Timer = require('../src/timer.js')(Event, MockUtil);
     Event.on('timer/running', function() { MockUtil.incrementMilli(); });
-    var stoppedEvent = false;
+    var startedEvent = false, stoppedEvent = false;
+    Event.on('timer/started', function() { startedEvent = true; });
     Event.on('timer/stopped', function() { stoppedEvent = true; });
 
+    assert.equal(false, startedEvent);
     Timer.triggerDown();
     Timer.triggerUp();
+    assert.equal(true, startedEvent);
     assert.equal(0, Timer.getCurrent());
     MockUtil.fireInterval();
     assert.equal(1, Timer.getCurrent());

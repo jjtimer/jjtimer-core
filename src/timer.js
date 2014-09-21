@@ -37,6 +37,7 @@ var Timer = (function(Event, Util) {
     startTime = Util.getMilli();
     state = Running;
     intervalID = Util.setInterval(runningEmitter, 10);
+    Event.emit('timer/started');
     splitTimes = [];
   }
 

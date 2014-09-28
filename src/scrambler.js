@@ -9,9 +9,14 @@ var Scrambler = (function() {
     return list[index];
   }
 
+  function length() {
+    return list.length;
+  }
+
   return {
     register: register,
-    get: get
+    get: get,
+    length: length
   };
 });
 

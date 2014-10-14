@@ -28,6 +28,17 @@ describe('Session', function() {
     assert.equal(-1 /* DNF */, S.average());
     S.add({ time: 0 });
     S.add({ time: 0 });
-    assert.equal(0, S.average());
+    assert.equal(0, S.average().avg);
+  })
+
+  it('should calculate min/max of an average', function() {
+    var S = Session();
+    S.add({ time: 2 });
+    S.add({ time: 1 });
+    S.add({ time: 3 });
+    var avg = S.average();
+    assert.equal(2, avg.avg);
+    assert.equal(1, avg.min);
+    assert.equal(2, avg.max);
   })
 })

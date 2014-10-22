@@ -3,6 +3,14 @@ var Session = (function() {
 
   var solves = [];
 
+  function getSolves() {
+    return solves;
+  }
+
+  function replaceSolves(newSolves) {
+    solves = newSolves;
+  }
+
   function reset() {
     solves = [];
   }
@@ -93,6 +101,8 @@ var Session = (function() {
   }
 
   return {
+    getSolves: getSolves,
+    replaceSolves: replaceSolves,
     reset: reset,
     add: add,
     remove: remove,

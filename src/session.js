@@ -32,7 +32,9 @@ var Session = (function() {
     return solves[index];
   }
 
-  function toggle_dnf(index) {}
+  function toggle_dnf(index) {
+    solves[index]['DNF'] = !solves[index]['DNF'];
+  }
 
   function toggle_plus2(index) {}
 

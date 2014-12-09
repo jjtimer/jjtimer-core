@@ -41,4 +41,14 @@ describe('Session', function() {
     assert.equal(1, avg.min);
     assert.equal(2, avg.max);
   })
+
+  it('should be able to +2 and DNF times', function() {
+    var S = Session();
+    S.add({ time: 1 });
+    assert.equal(false, !!S.at(0)['DNF']);
+    S.toggle_dnf(0);
+    assert.equal(true, S.at(0)['DNF']);
+    S.toggle_dnf(0);
+    assert.equal(false, S.at(0)['DNF']);
+  })
 })

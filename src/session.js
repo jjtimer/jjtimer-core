@@ -38,6 +38,7 @@ var Session = (function() {
 
   function toggle_plus2(index) {
     solves[index]['+2'] = !solves[index]['+2'];
+    solves[index].time += solves[index]['+2'] ? 2000 : -2000;
   }
 
   function get_trim(size) {

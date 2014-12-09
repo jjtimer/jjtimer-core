@@ -54,8 +54,9 @@ describe('Session', function() {
     assert.equal(false, !!S.at(0)['+2']);
     S.toggle_plus2(0);
     assert.equal(true, S.at(0)['+2']);
+    assert.equal(2001, S.at(0).time);
     S.toggle_plus2(0);
-    assert.equal(false, S.at(0)['+2']);
+    assert.equal(1, S.at(0).time);
 
   })
 })

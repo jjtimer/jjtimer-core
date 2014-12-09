@@ -50,5 +50,12 @@ describe('Session', function() {
     assert.equal(true, S.at(0)['DNF']);
     S.toggle_dnf(0);
     assert.equal(false, S.at(0)['DNF']);
+
+    assert.equal(false, !!S.at(0)['+2']);
+    S.toggle_plus2(0);
+    assert.equal(true, S.at(0)['+2']);
+    S.toggle_plus2(0);
+    assert.equal(false, S.at(0)['+2']);
+
   })
 })

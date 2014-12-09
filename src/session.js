@@ -36,7 +36,9 @@ var Session = (function() {
     solves[index]['DNF'] = !solves[index]['DNF'];
   }
 
-  function toggle_plus2(index) {}
+  function toggle_plus2(index) {
+    solves[index]['+2'] = !solves[index]['+2'];
+  }
 
   function get_trim(size) {
     return Math.ceil(size / 20);
